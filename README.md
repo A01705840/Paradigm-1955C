@@ -21,7 +21,7 @@ To understand better the problem, I listed the statements that apply to the beha
 4. Meanwhile uneven amount of attacks are k/2+1 to the first ship and k/2 to the last ship.
 
 ## Modal
-## Parallel Programming
+### Parallel Programming
 
 For the making of the program, I used parallel programming, focusing on the division of the task of filling the durability array and the iteration of attacks on both sides (right_iter & left_iter). In more detail, this parallelism is on the task parallelism pattern, because it dividing the tasks. These tasks can be naturally independent or can be made to be independent from one another. (Pankratius, 2011).
 
@@ -31,7 +31,165 @@ This is how the thread would look like.
 ----------------------
 ![1955c drawio (1)](https://github.com/A01705840/Paradigm-1955C/assets/111139686/fe8e569f-e212-43b6-918a-04f7d2b751c5)
 
-As the problem, was not data heavy, I decided the best program would be OpenMP
+## Implementation
+As the problem, was not data heavy, I decided the best program would be OpenMP, since there is not efficiente use of a multicore on the GPU program like CUDA. This is the following code:
+
+```cpp
+int tests;
+int res;
+
+// Acumular los valores para después ingresar en el array
+void set_values(int start, int n, int val[]){
+    for (int i = start; i < n; i++) {
+        std::cin >> val[i];
+    }
+}
+
+//Se asignan los valores al array
+void set_durability(int start, int n, int* arr, int val[]){
+    for(int i = start; i < n; i++){
+        arr[i] = val[i];
+    }
+}
+
+//Para poder hace el parallel programming, 
+void left_iter(int n, int* arr, int k1, int &local_res){ 
+    for (int j = 0; j < n; j++) {
+        if(k1 > arr[j]){
+            local_res = local_res + 1;
+            k1 -= arr[j];
+            cout << "left attacks " << k1 << "\n";
+        }else if(k1 == arr[j]){
+            local_res = local_res + 1;
+            k1 = 0;
+            cout << "left attacks done \n";
+        }else if(k1 < arr[j]){
+            break;
+        }
+    }
+}
+
+void right_iter(int n, int* arr, int k2, int &local_res){
+    for(int j = n - 1; j >= 0; j--) {
+        if(k2 > arr[j]) {
+            local_res += 1;
+            k2 -= arr[j];
+        } else if(k2 == arr[j]) {
+            local_res += 1;
+            k2 = 0;
+        } else {
+            break;
+        }
+    }
+}
+
+int main() {
+    int *arg1 = new int[SIZE];
+    std::cin >> tests;
+
+    while (tests != 0) {
+        int n, k;
+        std::cin >> n >> k;
+        int *arr = new int[n];
+
+        int val[n];
+        set_values(0, n, val);
+        
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                set_durability(0, n/2, arg1, val);
+            }
+            #pragma omp section
+            {
+                set_durability(n/2, n, arg1, val);
+            }
+        }
+        for(int i = 0; i < n; i++){
+            cout << arg1[i];
+        }
+        int k1, k2;
+        if (k % 2 == 0) {
+            k2 = k / 2;
+            k1 = k / 2;
+            cout << k1 << k2;
+        } else {
+            k1 = k / 2 + 1;
+            k2 = k / 2;
+            cout << k1 << k2;
+        }
+
+        int local_res_left = 0;
+        int local_res_right = 0;
+
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                left_iter(n, arg1, k1, local_res_left);
+            }
+            #pragma omp section
+            {
+                right_iter(n, arg1, k2, local_res_right);
+            }
+        }
+
+        res = local_res_left + local_res_right;
+
+        cout << "res: " << res << endl;
+        tests--;
+    }
+    return 0;
+}
+
+```
+
+
+
+The function of set_durability(), its funcionality is arraging the input of the ships durability into an array.
+```cpp
+//Se asignan los valores al array
+void set_durability(int start, int n, int* arr, int val[]){
+    for(int i = start; i < n; i++){
+        arr[i] = val[i];
+    }
+}
+```
+
+Functions for left_iter and right_iter, simulate the attacks of the Kraken when it attacks from the left(last ship) and the right(first ship). These functions are divided to make the parallel programming independent from one another. 
+
+The implementation of parallel programming is shown on 
+```cpp
+#pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                set_durability(0, n/2, arg1, val);
+            }
+            #pragma omp section
+            {
+                set_durability(n/2, n, arg1, val);
+            }
+        }
+```
+And
+```cpp
+#pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                left_iter(n, arg1, k1, local_res_left);
+            }
+            #pragma omp section
+            {
+                right_iter(n, arg1, k2, local_res_right);
+            }
+        }
+```
+
+## Time complexity
+The complexity on this problem is based on the the worst case scenario. In which both the durability and the amount on attacks is a large number. For example, if the amount of durability is greater than the amount of damage done by the attacks, the the complexity is defined by O(k), k being the attacks. But the situation changes when encountering a situation where the durability is less than the amount of damage done vby the attacks, therefore the time complexity is dependent on the durability being O(a), a being the sum of durability of the ships.
 
 ## Citation
 CodeForces. (2001). Problem - 1955C - Codeforces Inhabitant of the Deep Sea. Codeforces. Retrieved 23 May. 2024, from https://codeforces.com/problemset/problem/1955/C.
