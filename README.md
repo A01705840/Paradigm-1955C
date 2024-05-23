@@ -1,6 +1,6 @@
 # Paradigm-1955C
 
-##Inhabitant of the Deep Sea
+## Inhabitant of the Deep Sea
 For this evidence, the problem used was 
 https://codeforces.com/problemset/problem/1955/C
 
