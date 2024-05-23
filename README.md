@@ -21,10 +21,12 @@ To understand better the problem, I listed the statements that apply to the beha
 4. Meanwhile uneven amount of attacks are k/2+1 to the first ship and k/2 to the last ship.
 
 ## Modal
-### Parallel Programming
+## Parallel Programming
 
 For the making of the program, I used parallel programming, focusing on the division of the task of filling the durability array and the iteration of attacks on both sides (right_iter & left_iter). In more detail, this parallelism is on the task parallelism pattern, because it dividing the tasks. These tasks can be naturally independent or can be made to be independent from one another. (Pankratius, 2011).
+
 ![image](https://github.com/A01705840/Paradigm-1955C/assets/111139686/bcf2ea17-9c87-4f0d-bf99-838e6dfe9b61)
+
 This is how the thread would look like.
 ----------------------
 ![1955c drawio (1)](https://github.com/A01705840/Paradigm-1955C/assets/111139686/fe8e569f-e212-43b6-918a-04f7d2b751c5)
