@@ -32,4 +32,6 @@ This is how the thread would look like.
 As the problem, was not data heavy, I decided the best program would be OpenMP
 
 ## Citation
+CodeForces. (2001). Problem - 1955C - Codeforces Inhabitant of the Deep Sea. Codeforces. Retrieved 23 May. 2024, from https://codeforces.com/problemset/problem/1955/C.
+
 Pankratius, V. (2011). Fundamentals of Multicore Software Development (1st ed.). CRC Press. Retrieved 23 May. 2024, from https://doi.org/https://0-search.ebscohost.com.biblioteca-ils.tec.mx/login.aspx?direct=true.
