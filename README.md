@@ -13,6 +13,28 @@ The number of attacks make by the Kraken is defined by k, after the attacks end,
 
 ¿How many ships has the Kraken taken down after the attack?
 
+#### Input
+```txt
+1
+4 6
+1 2 4 3
+```
+```txt
+1
+2 2
+3 2
+```
+```txt
+1
+5 20
+2 7 1 8 2
+```
+#### Output 
+```txt
+3
+0
+5
+```
 ## Problem
 To understand better the problem, I listed the statements that apply to the behavior of the program.
 1. The Kraken only attacks the first and last ship.
