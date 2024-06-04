@@ -57,6 +57,13 @@ This is how the thread would look like.
 As the problem, was not data heavy, I decided the best program would be OpenMP, since there is not efficiente use of a multicore on the GPU program like CUDA. This is the following code:
 
 ```cpp
+#include <iostream>
+#include <omp.h>
+#include <algorithm>
+
+#define SIZE 100000000
+using namespace std;
+
 int tests;
 int res;
 
@@ -76,31 +83,33 @@ void set_durability(int start, int n, int* arr, int val[]){
 
 //Para poder hace el parallel programming, 
 void left_iter(int n, int* arr, int k1, int &local_res){ 
-    for (int j = 0; j < n; j++) {
+    for (int j = 0; j < n; ++j) {
         if(k1 > arr[j]){
-            local_res = local_res + 1;
+            local_res +=1;
             k1 -= arr[j];
             cout << "left attacks " << k1 << "\n";
         }else if(k1 == arr[j]){
-            local_res = local_res + 1;
+            local_res +=1;
             k1 = 0;
             cout << "left attacks done \n";
         }else if(k1 < arr[j]){
-            break;
+            cout << "left attacks done \n";
         }
     }
 }
 
 void right_iter(int n, int* arr, int k2, int &local_res){
-    for(int j = n - 1; j >= 0; j--) {
-        if(k2 > arr[j]) {
-            local_res += 1;
-            k2 -= arr[j];
-        } else if(k2 == arr[j]) {
-            local_res += 1;
+    for(int j = 1; j < n; ++j){
+        if(k2 > arr[-j]){
+            local_res +=1;
+            k2 -= arr[-j];
+            cout << "right attacks " << k2 << "\n";
+        }else if(k2 == arr[-j]){
+            local_res +=1;
             k2 = 0;
-        } else {
-            break;
+            cout << "right attacks done \n";
+        }else if(k2 < arr[-j]){
+            cout << "right attacks done \n";
         }
     }
 }
@@ -128,9 +137,7 @@ int main() {
                 set_durability(n/2, n, arg1, val);
             }
         }
-        for(int i = 0; i < n; i++){
-            cout << arg1[i];
-        }
+
         int k1, k2;
         if (k % 2 == 0) {
             k2 = k / 2;
@@ -164,6 +171,7 @@ int main() {
     }
     return 0;
 }
+
 
 ```
 
