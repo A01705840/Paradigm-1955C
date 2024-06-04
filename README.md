@@ -224,4 +224,6 @@ The complexity on this problem is based on the the worst case scenario. In which
 ## Citation
 CodeForces. (2001). Problem - 1955C - Codeforces Inhabitant of the Deep Sea. Codeforces. Retrieved 23 May. 2024, from https://codeforces.com/problemset/problem/1955/C.
 
+Geeksforgeeks. (2023, March 19). Introduction to parallel programmin with OpenMP in C . Geeksforgeeks. Retrieved 04 June. 2024, from https://geeksforgeeks.org/introduction-to-parallel-programming-with-openmp-in-cpp/?ref=ml_lbp.
+
 Pankratius, V. (2011). Fundamentals of Multicore Software Development (1st ed.). CRC Press. Retrieved 23 May. 2024, from https://doi.org/https://0-search.ebscohost.com.biblioteca-ils.tec.mx/login.aspx?direct=true.
