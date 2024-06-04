@@ -34,7 +34,7 @@ void left_iter(int n, int* arr, int k1, int &local_res){
             k1 = 0;
             cout << "left attacks done \n";
         }else if(k1 < arr[j]){
-            break;
+            cout << "left attacks done \n";
         }
     }
 }
@@ -50,7 +50,7 @@ void right_iter(int n, int* arr, int k2, int &local_res){
             k2 = 0;
             cout << "right attacks done \n";
         }else if(k2 < arr[-j]){
-            break;
+            cout << "right attacks done \n";
         }
     }
 }
