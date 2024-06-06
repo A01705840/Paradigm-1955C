@@ -51,8 +51,9 @@ For the making of the program, I used parallel programming, focusing on the divi
 
 This is how the thread would look like.
 ----------------------
-![1955c drawio (1)](https://github.com/A01705840/Paradigm-1955C/assets/111139686/fe8e569f-e212-43b6-918a-04f7d2b751c5)
+![Diagrama sin título-Página-2 drawio](https://github.com/A01705840/Paradigm-1955C/assets/111139686/8ba05663-ceb5-4b86-a020-4bc8596c7c87)
 
+This threads can be seen with the functions left and right iteration and set durability. The grey areas, define the moment where the parallel programming is taking place. 
 ## Implementation
 As the problem, was not data heavy, I decided the best program would be OpenMP, since there is not efficiente use of a multicore on the GPU program like CUDA. This is the following code:
 
