@@ -218,6 +218,30 @@ And
             }
         }
 ```
+## Testing
+
+```txt
+1
+4 6
+1 2 4 3
+```
+![image](https://github.com/A01705840/Paradigm-1955C/assets/111139686/223e446d-5592-430c-8582-f8e0117e87d5)
+
+
+```txt
+1
+2 2
+3 2
+```
+![image](https://github.com/A01705840/Paradigm-1955C/assets/111139686/705d9170-2846-4550-85de-b9ab4c0e4ffe)
+
+```txt
+1
+5 20
+2 7 1 8 2
+```
+![image](https://github.com/A01705840/Paradigm-1955C/assets/111139686/d32aa2bd-51cc-4c3a-aaaa-751e6a5b7978)
+
 
 ## Time complexity
 The complexity on this problem is based on the the worst case scenario. In which both the durability and the amount on attacks is a large number. For example, if the amount of durability is greater than the amount of damage done by the attacks, the the complexity is defined by O(k), k being the attacks. But the situation changes when encountering a situation where the durability is less than the amount of damage done vby the attacks, therefore the time complexity is dependent on the durability being O(a), a being the sum of durability of the ships.
